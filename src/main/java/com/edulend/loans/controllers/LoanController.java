@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edulend.loans.datasource.LoanDatasource;
@@ -41,14 +42,14 @@ public class LoanController {
         return loanUseCase.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Loan getById(@PathVariable int id) {
-        return loanUseCase.getById(id)
+    @GetMapping("/by-id")
+    public Loan getById(@RequestParam int loan_id) {
+        return loanUseCase.getById(loan_id)
                 .orElseThrow(() -> new RuntimeException("Préstamo no encontrado"));
     }
 
-    @GetMapping("/user/{user_id}")
-    public List<Loan> getByUser(@PathVariable int user_id) {
+    @GetMapping("/by-user")
+    public List<Loan> getByUser(@RequestParam int user_id) {
         return loanUseCase.getByUser(user_id);
     }
 
